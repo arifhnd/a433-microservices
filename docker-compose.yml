@@ -1,22 +1,27 @@
+# Docker Compose file untuk aplikasi item-app dan database MongoDB menggunakan versi 3.8
 version: '3.8'
 
+# Mendefinisikan service yang akan dijalankan dalam container
 services:
+  
+  # Membuat service untuk database MongoDB dengan nama item-db
   item-db:
-    image: mongo:3
-    container_name: item-db
+    image: mongo:3 # Menggunakan image MongoDB versi 3
+    container_name: item-db # Nama container untuk service database
     volumes:
-      - app-db:/data/db
-    restart: always
+      - app-db:/data/db # Menggunakan volume untuk menyimpan data database secara persisten
+    restart: always # Mengatur agar container selalu restart jika terjadi kegagalan
 
+  # membuat service untuk aplikasi item-app yang akan berjalan di port 80 dan terhubung dengan database item-db
   item-app:
-    image: fazerdaze/item-app:v1
-    container_name: item-app
-    working_dir: /app
-    ports:
+    image: ghcr.io/arifhnd/item-app:v1 # Menggunakan image yang sudah dibuat untuk aplikasi item-app
+    container_name: item-app # Nama container untuk service aplikasi
+    working_dir: /app # Menentukan direktori kerja di dalam container
+    ports: # Mengekspos port 8080 di dalam container ke port 80 di host
       - "80:8080"
-    depends_on:
+    depends_on: # Menentukan bahwa service item-app bergantung pada service item-db, sehingga item-db akan dijalankan terlebih dahulu
       - item-db
-    restart: always
+    restart: always # Mengatur agar container selalu restart jika terjadi kegagalan
 
 volumes:
-  app-db:
+  app-db: # Mendefinisikan volume dengan nama app-db untuk menyimpan data database secara persisten
