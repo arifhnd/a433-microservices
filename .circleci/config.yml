@@ -33,7 +33,7 @@ jobs:
       - checkout
       # Mengaktifkan remote docker daemon agar kita bisa menjalankan perintah 'docker build' di dalam container CircleCI
       - setup_remote_docker:
-          version: 20.10.14
+          docker_layer_caching: true 
       - run:
           name: Build and Push Docker Image
           command: |
@@ -41,7 +41,7 @@ jobs:
             echo "$GITHUB_TOKEN" | docker login -u "$GITHUB_USERNAME" --password-stdin
             
             # Memproses build image dengan tag otomatis berdasarkan nomor build CircleCI atau git commit
-            IMAGE_NAME="$GITHUB_USERNAME/karsajobs"
+            IMAGE_NAME="ghcr.io/$GITHUB_USERNAME/karsajobs"
             docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$CIRCLE_SHA1 .
             
             # Push Image ke Github Container Registry
