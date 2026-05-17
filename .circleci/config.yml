@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Install Hadolint
           command: |
-            sudo wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-amd64
+            sudo wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.14.0/hadolint-linux-x86_64
             sudo chmod +x /usr/local/bin/hadolint
       - run:
           name: Run Hadolint against Dockerfile
