@@ -38,7 +38,7 @@ jobs:
           name: Build and Push Docker Image
           command: |
             # Mengambil kredensial dari Environment Variables yang disetel di dashboard CircleCI
-            echo "$GITHUB_TOKEN" | docker login -u "$GITHUB_USERNAME" --password-stdin
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_USERNAME" --password-stdin
             
             # Memproses build image dengan tag otomatis berdasarkan nomor build CircleCI atau git commit
             IMAGE_NAME="ghcr.io/$GITHUB_USERNAME/karsajobs"
