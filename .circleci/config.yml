@@ -1,9 +1,5 @@
 version: 2.1
 
-# Menggunakan orbs resmi CircleCI untuk mempermudah instalasi tools eksternal (Hadolint/Docker)
-orbs:
-  docker: circleci/docker@2.4.0
-
 jobs:
   lint-dockerfile:
     docker:
